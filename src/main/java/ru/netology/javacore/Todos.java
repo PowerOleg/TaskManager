@@ -12,7 +12,9 @@ public class Todos {
     }
 
     public void addTask(String task) {
-        tasks.add(new Task(task));
+        if (tasks.size() < 7) {
+            tasks.add(new Task(task));
+        }
     }
 
     public void removeTask(String task) {
