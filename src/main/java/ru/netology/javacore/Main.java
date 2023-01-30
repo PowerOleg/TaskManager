@@ -12,7 +12,11 @@ public class Main {
         Todos todos = new Todos();
         todos.addTask("бегать по пляжу");
         todos.addTask("сходить на турнички");
-        todos.addTask("поесть");
+        todos.addTask("плавать");
+        todos.addTask("почистить зубы");
+        todos.addTask("сходить в театр");
+        todos.addTask("заправить кровать");
+        todos.addTask("накормить кота");
         System.out.println(todos.getAllTasks());
         todos.removeTask("поесть");
         System.out.println(todos.getAllTasks());

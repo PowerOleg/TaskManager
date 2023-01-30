@@ -4,8 +4,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Todos {
-    Set<Task> tasks;
-    StringBuilder stringBuilder;
+    protected Set<Task> tasks;
+    private StringBuilder stringBuilder;
 
     public Todos() {
         this.tasks = new HashSet<>();
@@ -28,7 +28,7 @@ public class Todos {
         Iterator<String> iterator = taskList.iterator();
         while (iterator.hasNext()) {
             stringBuilder.append(iterator.next());
-            stringBuilder.append('\t');
+            stringBuilder.append(" ");
         }
         return stringBuilder.toString();
     }
