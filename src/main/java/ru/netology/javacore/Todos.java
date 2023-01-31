@@ -11,10 +11,12 @@ public class Todos {
         this.tasks = new HashSet<>();
     }
 
-    public void addTask(String task) {
+    public boolean addTask(String task) {
         if (tasks.size() < 7) {
             tasks.add(new Task(task));
+            return true;
         }
+        return false;
     }
 
     public void removeTask(String task) {
