@@ -15,12 +15,13 @@ public class Client {
         try (Socket clientSocket = new Socket("localhost", 8989);
              BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
              PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true)) {
-//{ "type": "ADD", "task": "Название задачи" }
-            JSONObject jsonObject1 = new JSONObject();
-            jsonObject1.put("type", "ADD");
-            jsonObject1.put("task", "купить пирожок");
-
-            out.println(jsonObject1.toJSONString());
+//{ "type": "ADD", "task": "Купить пирожок" }
+//            JSONObject jsonObject1 = new JSONObject();
+//            jsonObject1.put("type", "ADD");
+//            jsonObject1.put("task", "купить пирожок");
+//
+//            out.println(jsonObject1.toJSONString());
+            out.println("купить пирожок");
             String serverResponse2 = in.readLine();
             System.out.println(serverResponse2);
         } catch (IOException e) {

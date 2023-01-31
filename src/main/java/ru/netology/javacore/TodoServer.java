@@ -1,21 +1,19 @@
 package ru.netology.javacore;
 
-import com.google.gson.Gson;
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Scanner;                                               //???
 
 public class TodoServer {
     protected int port;
     protected Todos todos;
-    protected ServerLogic serverLogic;
+    protected ServerLogic serverLogic;                                                                 //?????????
+/* ! */    protected Command command;
 
     public TodoServer(int port, Todos todos) {
     this.port = port;
     this.todos = todos;
-    serverLogic = new ServerLogic();
+    serverLogic = new ServerLogic();                                                                //??????????
     }
 
     public void start() throws IOException {
@@ -28,14 +26,23 @@ public class TodoServer {
                     String clientRequest = in.readLine();
                     System.out.println(clientRequest);
                     System.out.println("2");                                                                //d
+//serverLogic будет парсить и определять ADD or REMOVE
+//                    сейчас тестим { "type": "ADD", "task": "Купить пирожок" }
+                    command = /*будет serverLogic.chooseCommand(clientRequest);*/new CommandAdd();    //убери new CommandAdd()
+                    command.execute(/*serverLogic.getTask*/             clientRequest);         //убери clientRequest
 
-                    //serverLogic определяющий ADD or REMOVE
 
+
+
+
+
+//
                     System.out.println("3");                                                                //d
                     /* ! */                    String response = todos.getAllTasks();
                     out.write(response);
                     out.newLine();
                     out.flush();
+                    System.out.println("4 "+ response);                                                                //d
                 }
             }
         }

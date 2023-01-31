@@ -3,12 +3,18 @@ package ru.netology.javacore;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Todos {
-    protected Set<Task> tasks;
+public class Todos {                //данный класс реализован как паттерн Singleton
+    private static Todos todos;
+    protected Set<Task> tasks = new HashSet<>();
     private StringBuilder stringBuilder;
 
-    public Todos() {
-        this.tasks = new HashSet<>();
+    private Todos() {}
+
+    public static synchronized Todos getInstance() {
+        if (todos == null) {
+            todos = new Todos();
+        }
+        return todos;
     }
 
     public boolean addTask(String task) {

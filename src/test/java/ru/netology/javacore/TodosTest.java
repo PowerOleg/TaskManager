@@ -9,7 +9,7 @@ public class TodosTest {
 
     @BeforeEach
     public void init() {
-        todos = new Todos();
+        todos = Todos.getInstance();
     }
 
     @Test
