@@ -26,13 +26,13 @@ public class TodoServer {
                     String clientRequest = in.readLine();
                     System.out.println(clientRequest);
                     System.out.println("2");                                                                //d
-//
+//ServerLogic
 
 
 
-
-                    command = serverLogic.getCommandType(clientRequest);
-                    command.execute(/*serverLogic.getTask*/             clientRequest);         //убери clientRequest
+                    String[] commandTypeAndTask= serverLogic.parse(clientRequest);
+                    command = serverLogic.getCommandType(commandTypeAndTask[0]);
+                    command.execute(commandTypeAndTask[1]);
 
 
 
@@ -41,7 +41,7 @@ public class TodoServer {
 
 //
                     System.out.println("3");                                                                //d
-/* ! */                    String response = todos.getAllTasks();
+                    String response = todos.getAllTasks();
                     out.write(response);
                     out.newLine();
                     out.flush();

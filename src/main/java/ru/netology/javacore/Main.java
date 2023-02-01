@@ -11,12 +11,23 @@ public class Main {
 //        server.start();
 
         ServerLogic serverLogic = new ServerLogic();
-        String[] commandAndTask= serverLogic.parse("{ \"type\": \"ADD\", \"task\": \"Купить пирожок\" }");
-        System.out.println("01 " + Arrays.deepToString(commandAndTask));
-        Command command = serverLogic.getCommandType(commandAndTask[0]);
+        String[] commandTypeAndTask= serverLogic.parse("{ \"type\": \"ADD\", \"task\": \"Купить пирожок\" }");
+        System.out.println("01 " + Arrays.deepToString(commandTypeAndTask));
+
+
+        Command command = serverLogic.getCommandType(commandTypeAndTask[0]);
         System.out.println("02 " + command);
         System.out.println("03 " + todos.getAllTasks());
-        command.execute(commandAndTask[1]);
+        command.execute(commandTypeAndTask[1]);
         System.out.println("04 " + todos.getAllTasks());
+        command.execute("task1");
+        command.execute("task2");
+
+
+
+        commandTypeAndTask= serverLogic.parse("{ \"type\": \"REMOVE\", \"task\": \"Купить пирожок\" }");
+        command = serverLogic.getCommandType(commandTypeAndTask[0]);
+        command.execute(commandTypeAndTask[1]);
+        System.out.println("05 " + todos.getAllTasks());
     }
 }

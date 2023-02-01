@@ -5,18 +5,20 @@ import com.google.gson.GsonBuilder;
 
 public class ServerLogic {
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-//    { "type": "ADD", "task": "Купить пирожок" }
 
     public String[] parse(String clientRequest) {
         ClassForParsing classForParsing = gson.fromJson(clientRequest, ClassForParsing.class);
-        String[] commandTypeAndTask = {classForParsing.getType(), classForParsing.getTask()};
-
+        return new String[]{classForParsing.getCommandType(), classForParsing.getTask()};
     }
 
-    public Command getCommandType(String type) {
-
-
-
-        return new CommandAdd();
+    public Command getCommandType(String commandType) {
+        switch (commandType) {
+            case "ADD":
+                return new CommandAdd();
+            case "REMOVE":
+                return new CommandRemove();
+            default:
+                return null;
+        }
     }
 }
