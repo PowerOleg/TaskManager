@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class Todos {                //данный класс реализован как паттерн Singleton
     private static Todos todos;
-    protected Set<Task> tasks = new HashSet<>();
+    protected List<Task> tasks = new ArrayList<>();                                //3
     private StringBuilder stringBuilder;
 
     private Todos() {}
@@ -25,13 +25,18 @@ public class Todos {                //данный класс реализова
         return false;
     }
 
-    public void removeTask(String task) {
-        tasks.removeIf(n -> n.getTask().equalsIgnoreCase(task));
+    public void removeTask(String task) {                                                       //1
+        for (Task iteratorTask : tasks) {
+            System.out.println(iteratorTask);                                                   //d
+            if (task.equalsIgnoreCase(iteratorTask.getTask())) {
+                iteratorTask.setDeleted(true);
+            }
+        }
     }
 
-    public String getAllTasks() {
+    public String getAllTasks() {                                   //2
         stringBuilder = new StringBuilder();
-        List<String> taskList = tasks.stream().map(n -> n.getTask()).collect(Collectors.toList());
+        List<String> taskList = tasks.stream().filter(n -> !n.isDeleted()).map(n -> n.getTask()).distinct().collect(Collectors.toList());
         taskList.sort(Comparator.comparing(n -> n));
         Iterator<String> iterator = taskList.iterator();
         while (iterator.hasNext()) {

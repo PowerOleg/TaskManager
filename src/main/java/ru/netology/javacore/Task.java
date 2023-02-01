@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Task {
     protected String task;
+    protected boolean deleted = false;
 
     public Task() {
     }
@@ -29,8 +30,12 @@ public class Task {
         return task;
     }
 
-    public void setTask(String task) {
-        this.task = task;
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     @Override
