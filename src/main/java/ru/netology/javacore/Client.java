@@ -17,6 +17,7 @@ public class Client {
              PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true)) {
 //{ "type": "ADD", "task": "Купить пирожок" }
             JSONObject jsonObject1 = new JSONObject();
+//            jsonObject1.put("type", "RESTORE");
             jsonObject1.put("type", "ADD");
             jsonObject1.put("task", "купить пирожок");
 

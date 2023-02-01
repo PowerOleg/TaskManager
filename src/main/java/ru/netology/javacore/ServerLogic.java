@@ -17,6 +17,8 @@ public class ServerLogic {
                 return new CommandAdd();
             case "REMOVE":
                 return new CommandRemove();
+            case "RESTORE":
+                return new CommandRestore();
             default:
                 return null;
         }
