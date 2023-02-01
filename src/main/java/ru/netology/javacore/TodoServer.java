@@ -26,9 +26,12 @@ public class TodoServer {
                     String clientRequest = in.readLine();
                     System.out.println(clientRequest);
                     System.out.println("2");                                                                //d
-//serverLogic будет парсить и определять ADD or REMOVE
-//                    сейчас тестим { "type": "ADD", "task": "Купить пирожок" }
-                    command = /*будет serverLogic.chooseCommand(clientRequest);*/new CommandAdd();    //убери new CommandAdd()
+//
+
+
+
+
+                    command = serverLogic.getCommandType(clientRequest);
                     command.execute(/*serverLogic.getTask*/             clientRequest);         //убери clientRequest
 
 
@@ -38,7 +41,7 @@ public class TodoServer {
 
 //
                     System.out.println("3");                                                                //d
-                    /* ! */                    String response = todos.getAllTasks();
+/* ! */                    String response = todos.getAllTasks();
                     out.write(response);
                     out.newLine();
                     out.flush();
