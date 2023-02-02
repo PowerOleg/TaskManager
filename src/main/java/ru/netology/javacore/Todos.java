@@ -1,12 +1,11 @@
 package ru.netology.javacore;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Todos {
     private static Todos todos;
     protected Deque<Task> tasks = new ArrayDeque<>();
-    private StringBuilder stringBuilder;
-
     private Todos() {}
 
     public static synchronized Todos getInstance() {
@@ -39,13 +38,7 @@ public class Todos {
     }
 
     public String getAllTasks() {
-        stringBuilder = new StringBuilder();
-        Iterator<String> iterator = tasks.stream().filter(n -> !n.isDeleted()).map(n -> n.getTask())
-                .sorted().distinct().iterator();
-        while (iterator.hasNext()) {
-            stringBuilder.append(iterator.next());
-            stringBuilder.append(" ");
-        }
-        return stringBuilder.toString();
+        return tasks.stream().filter(n -> !n.isDeleted()).map(n -> n.getTask())
+                .sorted().distinct().collect(Collectors.joining(" "));
     }
 }
