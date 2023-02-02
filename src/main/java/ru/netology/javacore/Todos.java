@@ -17,7 +17,13 @@ public class Todos {
     }
 
     public boolean addTask(String task) {
-        if (tasks.size() < numberOfTasks) {
+        int count = 0;
+        for (Task t : tasks) {
+            if (!t.isDeleted()) {
+                count++;
+            }
+        }
+        if (count < numberOfTasks) {
             tasks.add(new Task(task));
             return true;
         }
