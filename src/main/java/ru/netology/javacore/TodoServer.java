@@ -5,8 +5,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class TodoServer {
-    protected int port;
-    protected Todos todos;
+    protected final int port;
+    protected final Todos todos;
     protected ServerLogic serverLogic;
     protected Command command;
 
