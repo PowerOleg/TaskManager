@@ -14,7 +14,6 @@ public class TodosTest {
     @BeforeEach
     public void init() {
         todos = Todos.getInstance();
-//        todos.tasks = Collections.newSetFromMap(new ConcurrentHashMap<>());
         todos.tasks = new ArrayDeque<>();
     }
 
@@ -49,7 +48,7 @@ public class TodosTest {
 
     @Test
     public void testGetAllTasksPositive() {
-        String expected = "бегать по пляжу заправить кровать накормить кота плавать почистить зубы сходить в театр сходить на турнички ";
+        String expected = "бегать по пляжу заправить кровать накормить кота плавать почистить зубы сходить в театр сходить на турнички";
         todos.addTask("бегать по пляжу");
         todos.addTask("сходить на турнички");
         todos.addTask("плавать");
