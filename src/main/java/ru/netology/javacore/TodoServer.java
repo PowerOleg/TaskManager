@@ -24,9 +24,9 @@ public class TodoServer {
                      BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()))) {
                     String clientRequest = in.readLine();
                     System.out.println("Запрос клиента: " + clientRequest);
-                    String[] commandTypeAndTask = serverLogic.parse(clientRequest);
-                    command = serverLogic.getCommandType(commandTypeAndTask[0]);
-                    command.execute(commandTypeAndTask[1]);
+                    ClassForParsing classForParsing = serverLogic.parse(clientRequest);
+                    command = serverLogic.getCommandType(classForParsing.getCommandType());
+                    command.execute(classForParsing.getTask());
 
                     String response = todos.getAllTasks();
                     out.write(response);

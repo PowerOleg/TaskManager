@@ -6,9 +6,8 @@ import com.google.gson.GsonBuilder;
 public class ServerLogic {
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public String[] parse(String clientRequest) {
-        ClassForParsing classForParsing = gson.fromJson(clientRequest, ClassForParsing.class);
-        return new String[]{classForParsing.getCommandType(), classForParsing.getTask()};
+    public ClassForParsing parse(String clientRequest) {
+        return gson.fromJson(clientRequest, ClassForParsing.class);
     }
 
     public Command getCommandType(String commandType) {
