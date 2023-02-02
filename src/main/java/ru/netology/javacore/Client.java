@@ -23,7 +23,7 @@ public class Client {
 //            jsonObject1.put("task", "купить азбуку");
 
 //            jsonObject1.put("type", "REMOVE");
-//            jsonObject1.put("task", "купить булку");
+//            jsonObject1.put("task", "купить машину");
 
             out.println(jsonObject1.toJSONString());
 

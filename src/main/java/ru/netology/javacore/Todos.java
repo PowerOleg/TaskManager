@@ -5,7 +5,8 @@ import java.util.stream.Collectors;
 
 public class Todos {                //данный класс реализован как паттерн Singleton
     private static Todos todos;
-    protected List<Task> tasks = new ArrayList<>();                                //3
+//    protected List<Task> tasks = new ArrayList<>();                                //3
+    protected Deque<Task> tasks = new ArrayDeque<>();                                //5
     private StringBuilder stringBuilder;
 
     private Todos() {}
@@ -47,7 +48,7 @@ public class Todos {                //данный класс реализова
     public String getAllTasks() {                                   //2
         stringBuilder = new StringBuilder();
         System.out.println("0 " + tasks);
-        List<String> taskList = tasks.stream()/*.filter(n -> !n.isDeleted())*/.map(n -> n.getTask())/*.distinct()*/.collect(Collectors.toList());
+        List<String> taskList = tasks.stream().filter(n -> !n.isDeleted()).map(n -> n.getTask()).distinct().collect(Collectors.toList());
         taskList.sort(Comparator.comparing(n -> n));
         for (String s : taskList) {
             stringBuilder.append(s);

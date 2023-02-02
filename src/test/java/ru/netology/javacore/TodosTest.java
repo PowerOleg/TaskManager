@@ -4,10 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class TodosTest {
@@ -18,7 +15,7 @@ public class TodosTest {
     public void init() {
         todos = Todos.getInstance();
 //        todos.tasks = Collections.newSetFromMap(new ConcurrentHashMap<>());
-        todos.tasks = new ArrayList<>();                                                            //4
+        todos.tasks = new ArrayDeque<>();                                                            //4
     }
 
     @Test
