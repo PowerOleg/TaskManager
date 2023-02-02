@@ -3,9 +3,9 @@ package ru.netology.javacore;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Todos {                //данный класс реализован как паттерн Singleton
+public class Todos {
     private static Todos todos;
-    protected Set<Task> tasks = new HashSet<>();
+    protected Deque<Task> tasks = new ArrayDeque<>();
     private StringBuilder stringBuilder;
 
     private Todos() {}
@@ -26,16 +26,26 @@ public class Todos {                //данный класс реализова
     }
 
     public void removeTask(String task) {
-        tasks.removeIf(n -> n.getTask().equalsIgnoreCase(task));
+        Task deletedTask = null;
+        for (Task iteratorTask : tasks) {
+            if (task.equalsIgnoreCase(iteratorTask.getTask())) {
+                iteratorTask.setDeleted(true);
+                deletedTask = iteratorTask;
+            }
+        }
+        if (deletedTask != null) {
+            tasks.remove(deletedTask);
+            tasks.add(deletedTask);
+        }
     }
 
     public String getAllTasks() {
         stringBuilder = new StringBuilder();
-        List<String> taskList = tasks.stream().map(n -> n.getTask()).collect(Collectors.toList());
+        System.out.println("0 " + tasks);
+        List<String> taskList = tasks.stream().filter(n -> !n.isDeleted()).map(n -> n.getTask()).distinct().collect(Collectors.toList());
         taskList.sort(Comparator.comparing(n -> n));
-        Iterator<String> iterator = taskList.iterator();
-        while (iterator.hasNext()) {
-            stringBuilder.append(iterator.next());
+        for (String s : taskList) {
+            stringBuilder.append(s);
             stringBuilder.append(" ");
         }
         return stringBuilder.toString();
