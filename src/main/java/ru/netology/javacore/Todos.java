@@ -3,10 +3,9 @@ package ru.netology.javacore;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Todos {                //данный класс реализован как паттерн Singleton
+public class Todos {
     private static Todos todos;
-//    protected List<Task> tasks = new ArrayList<>();                                //3
-    protected Deque<Task> tasks = new ArrayDeque<>();                                //5
+    protected Deque<Task> tasks = new ArrayDeque<>();
     private StringBuilder stringBuilder;
 
     private Todos() {}
@@ -26,26 +25,21 @@ public class Todos {                //данный класс реализова
         return false;
     }
 
-    public void removeTask(String task) {                                                       //1
+    public void removeTask(String task) {
         Task deletedTask = null;
         for (Task iteratorTask : tasks) {
-            System.out.println(iteratorTask);                                                   //d
             if (task.equalsIgnoreCase(iteratorTask.getTask())) {
                 iteratorTask.setDeleted(true);
                 deletedTask = iteratorTask;
-
-
-
             }
         }
         if (deletedTask != null) {
             tasks.remove(deletedTask);
             tasks.add(deletedTask);
         }
-
     }
 
-    public String getAllTasks() {                                   //2
+    public String getAllTasks() {
         stringBuilder = new StringBuilder();
         System.out.println("0 " + tasks);
         List<String> taskList = tasks.stream().filter(n -> !n.isDeleted()).map(n -> n.getTask()).distinct().collect(Collectors.toList());

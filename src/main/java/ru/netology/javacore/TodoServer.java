@@ -7,13 +7,13 @@ import java.net.Socket;
 public class TodoServer {
     protected int port;
     protected Todos todos;
-    protected ServerLogic serverLogic;                                                                 //?????????
-/* ! */    protected Command command;
+    protected ServerLogic serverLogic;
+    protected Command command;
 
     public TodoServer(int port, Todos todos) {
     this.port = port;
     this.todos = todos;
-    serverLogic = new ServerLogic();                                                                //??????????
+    serverLogic = new ServerLogic();
     }
 
     public void start() throws IOException {
@@ -22,43 +22,25 @@ public class TodoServer {
             while (true) {
                 try (Socket socket = serverSocket.accept(); BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                      BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()))) {
-                    System.out.println("1");                                                                //d
                     String clientRequest = in.readLine();
-                    System.out.println(clientRequest);
-                    System.out.println("2");                                                                //d
-//ServerLogic
-
-
-
-                    String[] commandTypeAndTask= serverLogic.parse(clientRequest);
+                    System.out.println("Запрос клиента: " + clientRequest);
+                    String[] commandTypeAndTask = serverLogic.parse(clientRequest);
                     command = serverLogic.getCommandType(commandTypeAndTask[0]);
                     command.execute(commandTypeAndTask[1]);
 
-
-
-
-
-
-//
-                    System.out.println("3");                                                                //d
                     String response = todos.getAllTasks();
                     out.write(response);
                     out.newLine();
                     out.flush();
-                    System.out.println("4 "+ response);                                                                //d
+                    System.out.println("Ответ сервера: "+ response);                                                                //d
                 }
             }
         }
-
-
-
-
     }
 
     public ServerLogic getServerLogic() {
         return serverLogic;
     }
-
     public void setServerLogic(ServerLogic serverLogic) {
         this.serverLogic = serverLogic;
     }
