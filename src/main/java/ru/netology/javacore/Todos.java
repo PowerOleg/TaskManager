@@ -41,7 +41,6 @@ public class Todos {
 
     public String getAllTasks() {
         stringBuilder = new StringBuilder();
-        System.out.println("0 " + tasks);
         List<String> taskList = tasks.stream().filter(n -> !n.isDeleted()).map(n -> n.getTask()).distinct().collect(Collectors.toList());
         taskList.sort(Comparator.comparing(n -> n));
         for (String s : taskList) {

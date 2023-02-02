@@ -15,7 +15,7 @@ public class TodosTest {
     public void init() {
         todos = Todos.getInstance();
 //        todos.tasks = Collections.newSetFromMap(new ConcurrentHashMap<>());
-        todos.tasks = new ArrayDeque<>();                                                            //4
+        todos.tasks = new ArrayDeque<>();
     }
 
     @Test
@@ -40,10 +40,10 @@ public class TodosTest {
 
     @Test
     public void testRemoveTaskPositive() {
-        String expected = "[]";
+        String expected = "";
         todos.addTask("прыгать");
         todos.removeTask("прыгать");
-        String result = todos.tasks.toString();
+        String result = todos.getAllTasks();
         Assertions.assertEquals(expected, result);
     }
 

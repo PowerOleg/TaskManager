@@ -23,10 +23,9 @@ public class Client {
 //            jsonObject1.put("task", "купить азбуку");
 
 //            jsonObject1.put("type", "REMOVE");
-//            jsonObject1.put("task", "3");
+//            jsonObject1.put("task", "1");
 
             out.println(jsonObject1.toJSONString());
-
             String serverResponse2 = in.readLine();
             System.out.println(serverResponse2);
         } catch (IOException e) {
