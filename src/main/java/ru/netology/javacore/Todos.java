@@ -26,21 +26,31 @@ public class Todos {                //данный класс реализова
     }
 
     public void removeTask(String task) {                                                       //1
+        Task deletedTask = null;
         for (Task iteratorTask : tasks) {
             System.out.println(iteratorTask);                                                   //d
             if (task.equalsIgnoreCase(iteratorTask.getTask())) {
                 iteratorTask.setDeleted(true);
+                deletedTask = iteratorTask;
+
+
+
             }
         }
+        if (deletedTask != null) {
+            tasks.remove(deletedTask);
+            tasks.add(deletedTask);
+        }
+
     }
 
     public String getAllTasks() {                                   //2
         stringBuilder = new StringBuilder();
-        List<String> taskList = tasks.stream().filter(n -> !n.isDeleted()).map(n -> n.getTask()).distinct().collect(Collectors.toList());
+        System.out.println("0 " + tasks);
+        List<String> taskList = tasks.stream()/*.filter(n -> !n.isDeleted())*/.map(n -> n.getTask())/*.distinct()*/.collect(Collectors.toList());
         taskList.sort(Comparator.comparing(n -> n));
-        Iterator<String> iterator = taskList.iterator();
-        while (iterator.hasNext()) {
-            stringBuilder.append(iterator.next());
+        for (String s : taskList) {
+            stringBuilder.append(s);
             stringBuilder.append(" ");
         }
         return stringBuilder.toString();
