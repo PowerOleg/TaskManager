@@ -1,7 +1,6 @@
 package ru.netology.javacore;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Todos {
     private static Todos todos;
@@ -41,10 +40,10 @@ public class Todos {
 
     public String getAllTasks() {
         stringBuilder = new StringBuilder();
-        List<String> taskList = tasks.stream().filter(n -> !n.isDeleted()).map(n -> n.getTask()).distinct().collect(Collectors.toList());
-        taskList.sort(Comparator.comparing(n -> n));
-        for (String s : taskList) {
-            stringBuilder.append(s);
+        Iterator<String> iterator = tasks.stream().filter(n -> !n.isDeleted()).map(n -> n.getTask())
+                .sorted().distinct().iterator();
+        while (iterator.hasNext()) {
+            stringBuilder.append(iterator.next());
             stringBuilder.append(" ");
         }
         return stringBuilder.toString();
