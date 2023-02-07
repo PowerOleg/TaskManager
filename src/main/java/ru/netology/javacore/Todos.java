@@ -1,20 +1,12 @@
 package ru.netology.javacore;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.stream.Collectors;
 
 public class Todos {
-    protected static Todos todos;
     protected Deque<Task> tasks = new ArrayDeque<>();
-    protected int numberOfTasks = 7;
-    private Todos() {}
-
-    public static synchronized Todos getInstance() {
-        if (todos == null) {
-            todos = new Todos();
-        }
-        return todos;
-    }
+    protected int MAX_TASKS = 7;
 
     public boolean addTask(String task) {
         int count = 0;
@@ -23,7 +15,7 @@ public class Todos {
                 count++;
             }
         }
-        if (count < numberOfTasks) {
+        if (count < MAX_TASKS) {
             tasks.add(new Task(task));
             return true;
         }
@@ -48,14 +40,15 @@ public class Todos {
     }
 
     public String getAllTasks() {
-        return tasks.stream().filter(n -> !n.isDeleted()).map(n -> n.getTask())
+        return tasks.stream().filter(n -> !n.isDeleted()).map(Task::getTask)
                 .sorted().distinct().collect(Collectors.joining(" "));
     }
 
-    public int getNumberOfTasks() {
-        return numberOfTasks;
+    public int getMAX_TASKS() {
+        return MAX_TASKS;
     }
-    public void setNumberOfTasks(int numberOfTasks) {
-        this.numberOfTasks = numberOfTasks;
+
+    public void setMAX_TASKS(int maxTasks) {
+        this.MAX_TASKS = maxTasks;
     }
 }

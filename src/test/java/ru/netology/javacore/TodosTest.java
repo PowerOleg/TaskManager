@@ -13,7 +13,7 @@ public class TodosTest {
 
     @BeforeEach
     public void init() {
-        todos = Todos.getInstance();
+        todos = new Todos();
         todos.tasks = new ArrayDeque<>();
     }
 

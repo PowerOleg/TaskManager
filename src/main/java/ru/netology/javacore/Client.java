@@ -19,10 +19,10 @@ public class Client {
             JSONObject jsonObject1 = new JSONObject();
 //            jsonObject1.put("type", "RESTORE");
             jsonObject1.put("type", "ADD");
-            jsonObject1.put("task", "лежать");
+            jsonObject1.put("task", "task1");
 
 //            jsonObject1.put("type", "REMOVE");
-//            jsonObject1.put("task", "2");
+//            jsonObject1.put("task", "лежать");
 
             out.println(jsonObject1.toJSONString());
             String serverResponse2 = in.readLine();
