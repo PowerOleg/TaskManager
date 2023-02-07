@@ -6,14 +6,14 @@ import java.net.Socket;
 
 public class TodoServer {
     protected final int port;
-    protected final Todos todos;
+    protected Todos todos;
     protected ServerLogic serverLogic;
     protected Command command;
 
     public TodoServer(int port, Todos todos) {
-    this.port = port;
-    this.todos = todos;
-    serverLogic = new ServerLogic();
+        this.port = port;
+        this.todos = todos;
+        serverLogic = new ServerLogic();
     }
 
     public void start() throws IOException {
@@ -21,18 +21,18 @@ public class TodoServer {
             System.out.println("Starting server at " + port + "...");
             while (true) {
                 try (Socket socket = serverSocket.accept(); BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                     BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()))) {
+                    BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()))) {
                     String clientRequest = in.readLine();
                     System.out.println("Запрос клиента: " + clientRequest);
                     ClassForParsing classForParsing = serverLogic.parse(clientRequest);
-                    command = serverLogic.getCommandType(classForParsing.getCommandType());
+                    command = serverLogic.getCommandType(classForParsing.getCommandType(), todos);
                     command.execute(classForParsing.getTask());
 
                     String response = todos.getAllTasks();
                     out.write(response);
                     out.newLine();
                     out.flush();
-                    System.out.println("Ответ сервера: "+ response);                                                                //d
+                    System.out.println("Ответ сервера: " + response);                                                                //d
                 }
             }
         }
@@ -41,7 +41,16 @@ public class TodoServer {
     public ServerLogic getServerLogic() {
         return serverLogic;
     }
+
+    public Todos getTodos() {
+        return todos;
+    }
+
     public void setServerLogic(ServerLogic serverLogic) {
         this.serverLogic = serverLogic;
+    }
+
+    public void setTodos(Todos todos) {
+        this.todos = todos;
     }
 }

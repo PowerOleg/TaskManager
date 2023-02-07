@@ -10,14 +10,18 @@ public class ServerLogic {
         return gson.fromJson(clientRequest, ClassForParsing.class);
     }
 
-    public Command getCommandType(String commandType) {
+    public Command getCommandType(String commandType, Todos todos) {
         switch (commandType) {
             case "ADD":
-                return new CommandAdd();
+                return todos::addTask;
             case "REMOVE":
-                return new CommandRemove();
+                return todos::removeTask;
             case "RESTORE":
-                return new CommandRestore();
+                return (n) -> {
+                    Task task1 = todos.tasks.pollLast();
+                    if (task1 != null) task1.setDeleted(!task1.isDeleted());
+                    todos.tasks.addFirst(task1);
+                };
             default:
                 return null;
         }
